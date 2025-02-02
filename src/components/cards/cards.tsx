@@ -5,11 +5,7 @@ import Card from "../info-card/info-card";
 import { InfoCard } from "@/types/types";
 import withDataFetching from "@/hoc/withDataFetching";
 
-type CardsProps = {
-  data: InfoCard[];
-};
-
-function Cards({ data }: CardsProps) {
+function Cards({ data }: { data: InfoCard[] }) {
   return (
     <div className="flex gap-4 flex-wrap">
       {data.map((card) => (

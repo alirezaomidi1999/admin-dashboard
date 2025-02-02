@@ -1,5 +1,4 @@
 "use client";
-
 import api from "../api";
 
 export const getCharts = async () => {

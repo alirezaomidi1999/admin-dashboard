@@ -8,13 +8,13 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from "@/components/shadcn/ui/card";
 import {
   ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from "@/components/ui/chart";
+} from "@/components/shadcn/ui/chart";
 import { PieChartData } from "@/types/types";
 const chartData = [
   { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
@@ -48,7 +48,7 @@ const chartConfig = {
     color: "hsl(var(--chart-5))",
   },
 } satisfies ChartConfig;
-export function Piechart({ data }:{data:PieChartData[]}) {
+export function Piechart({ data }: { data: PieChartData[] }) {
   return (
     <Card className="flex flex-col grow w-[300px]">
       <CardHeader className="items-center pb-0">
@@ -56,10 +56,7 @@ export function Piechart({ data }:{data:PieChartData[]}) {
         <CardDescription>January - June 2024</CardDescription>
       </CardHeader>
       <CardContent className="flex-1 pb-0">
-        <ChartContainer
-          config={chartConfig}
-          className=""
-        >
+        <ChartContainer config={chartConfig} className="">
           <PieChart>
             <ChartTooltip
               cursor={false}

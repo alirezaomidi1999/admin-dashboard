@@ -13,7 +13,7 @@ import {
 } from "@/components/shadcn/ui/dropdown-menu";
 import { Button } from "@/components/shadcn/ui/button";
 import Image from "next/image";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/shadcn/ui/avatar";
 
 export default function Header() {
   const [language, setLanguage] = useState("English");

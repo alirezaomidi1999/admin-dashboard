@@ -8,13 +8,13 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from "@/components/shadcn/ui/card";
 import {
   ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from "@/components/ui/chart";
+} from "@/components/shadcn/ui/chart";
 import { BarChartData } from "@/types/types";
 const chartData = [
   { month: "January", sales: 186 },
@@ -32,9 +32,8 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-
-export function Barchart({ data }:{data:BarChartData[]}) {
-  console.log(data)
+export function Barchart({ data }: { data: BarChartData[] }) {
+  console.log(data);
   return (
     <Card className="grow w-[300px]">
       <CardHeader>

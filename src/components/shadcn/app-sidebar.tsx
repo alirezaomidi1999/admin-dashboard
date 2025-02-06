@@ -35,7 +35,7 @@ const items = [
   },
   {
     title: "Reports",
-    url: "/reports",
+    url: "/reports-management",
     icon: TicketsPlane,
   },
 ];

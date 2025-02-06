@@ -3,7 +3,7 @@ import React from "react";
 import { Barchart } from "./bar-chart";
 import { Piechart } from "./pie-chart";
 import withDataFetching from "@/hoc/withDataFetching";
-import { getCharts } from "@/services/queries/getCharts";
+import { getCharts } from "@/services/queries/get-charts";
 import { ChartData } from "@/types/types";
 
 function Charts({ data }: { data: ChartData }) {
@@ -18,6 +18,6 @@ const ChartsWithData = withDataFetching({
   queryKey: ["charts"],
   queryFn: getCharts,
   skeletonLength: 2,
-  skeletonStyle: "flex grow w-[300px] lg:h-[400px] h-[300px]",
+  parentSkeletonStyle: "flex grow w-[300px] lg:h-[400px] h-[300px]",
 })(Charts);
 export default ChartsWithData;

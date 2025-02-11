@@ -1,27 +1,29 @@
-import NextAuth from "next-auth";
+import api from "@/services/api";
+import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
-export const authOptions = {
+export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        email: { label: "Email", type: "email", placeholder: "you@example.com" },
+        email: {
+          label: "Email",
+          type: "email",
+          placeholder: "you@example.com",
+        },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        const res = await fetch("http://localhost:3000/api/auth/login", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            email: credentials?.email,
-            password: credentials?.password,
-          }),
-        });
+        const params = {
+          email: credentials?.email,
+          password: credentials?.password,
+        };
+        const res = await api.post("/auth/login", params);
 
-        const user = await res.json();
+        const user = await res.data;
 
-        if (!res.ok) {
+        if (res.status > 299) {
           throw new Error(user.error || "Login failed!");
         }
 
@@ -35,13 +37,12 @@ export const authOptions = {
   ],
   callbacks: {
     async jwt({ token, user }) {
-      if (user) {
-        token.accessToken = user.accessToken;
-      }
+      console.log("tokenkwt: ", token);
+      console.log("user: ", user);
+
       return token;
     },
     async session({ session, token }) {
-      session.user.accessToken = token.accessToken;
       return session;
     },
   },

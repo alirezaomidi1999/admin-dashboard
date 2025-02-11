@@ -1,11 +1,9 @@
 "use client";
-import { TrendingUp } from "lucide-react";
 import { Bar, BarChart, CartesianGrid, LabelList, XAxis } from "recharts";
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/shadcn/ui/card";
@@ -16,15 +14,6 @@ import {
   ChartTooltipContent,
 } from "@/components/shadcn/ui/chart";
 import { BarChartData } from "@/types/types";
-const chartData = [
-  { month: "January", sales: 186 },
-  { month: "February", sales: 305 },
-  { month: "March", sales: 237 },
-  { month: "April", sales: 73 },
-  { month: "May", sales: 209 },
-  { month: "June", sales: 214 },
-];
-
 const chartConfig = {
   sales: {
     label: "sales",
@@ -72,14 +61,6 @@ export function Barchart({ data }: { data: BarChartData[] }) {
           </BarChart>
         </ChartContainer>
       </CardContent>
-      {/* <CardFooter className="flex-col items-start gap-2 text-sm">
-        <div className="flex gap-2 font-medium leading-none">
-          Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-        </div>
-        <div className="leading-none text-muted-foreground">
-          Showing total visitors for the last 6 months
-        </div>
-      </CardFooter> */}
     </Card>
   );
 }

@@ -32,21 +32,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ReactQueryProvider>
-          <SidebarProvider>
-            <div className="flex w-full">
-              <AppSidebar />
-              <div className="flex flex-col grow">
-                <header>
-                  <Header />
-                </header>
-                <main className="bg-background min-h-[calc(100vh-75px)] px-8 py-8">
-                  {children}
-                </main>
-              </div>
-            </div>
-          </SidebarProvider>
-        </ReactQueryProvider>
+        <ReactQueryProvider>{children}</ReactQueryProvider>
       </body>
     </html>
   );

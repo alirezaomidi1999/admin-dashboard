@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { InfoCard } from "@/types/types";
+import type { InfoCard } from "@/types/types";
 import Image from "next/image";
 export default function InfoCard({
   title,

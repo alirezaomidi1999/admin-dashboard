@@ -39,12 +39,12 @@ export default function withDataFetching<T>(config: {
             <>
               {/* ⚠ خطایی رخ داده است: {(error as Error).message} */}
 
-              <button
+              <div
                 onClick={() => refetch()} // درخواست دوباره با refetch
-                className="mt-4 px-4 py-2 bg-red-500 w-auto text-green-500 rounded"
+                className="mt-4 px-4 py-2 bg-red-500 cursor-pointer rounded-sm text-white"
               >
                 try again
-              </button>
+              </div>
             </>
           )
         );

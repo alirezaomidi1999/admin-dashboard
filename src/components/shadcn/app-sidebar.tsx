@@ -1,12 +1,17 @@
 "use client";
-import { Home, ShoppingBasket, Users, TicketsPlane } from "lucide-react";
+import {
+  Home,
+  ShoppingBasket,
+  Users,
+  TicketsPlane,
+  LogOut,
+} from "lucide-react";
 
 import {
   Sidebar,
   SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
@@ -15,7 +20,7 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
-
+import { signOut } from "next-auth/react";
 // Menu items.
 const items = [
   {
@@ -37,6 +42,11 @@ const items = [
     title: "Reports",
     url: "/reports-management",
     icon: TicketsPlane,
+  },
+  {
+    title: "Logout",
+    url: "/login",
+    icon: LogOut,
   },
 ];
 export function AppSidebar() {
@@ -62,7 +72,15 @@ export function AppSidebar() {
                     }`}
                     asChild
                   >
-                    <Link href={item.url}>
+                    <Link
+                      href={item.url}
+                      onClick={async (e) => {
+                        if (item.url === "/login") {
+                          e.preventDefault();
+                          await signOut();
+                        }
+                      }}
+                    >
                       <item.icon />
                       <span>{item.title}</span>
                     </Link>

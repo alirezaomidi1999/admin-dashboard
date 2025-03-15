@@ -24,7 +24,7 @@ export type TableData<T> = T[];
 export type User = {
   id: number;
   name: string;
-  role:string;
+  role: string;
   status: "pending" | "processing" | "success" | "failed";
   email: string;
 };
@@ -34,11 +34,40 @@ export type Product = {
   price: number;
   stock: number;
   category: string;
-}
+};
 export type Report = {
   id: number;
   date: string;
-  type: 'Sales' | 'Inventory' | 'Users' | 'Orders' | 'Revenue' | 'Support' | 'Marketing' | 'Products' | 'Feedback' | 'Expenses';
+  type:
+    | "Sales"
+    | "Inventory"
+    | "Users"
+    | "Orders"
+    | "Revenue"
+    | "Support"
+    | "Marketing"
+    | "Products"
+    | "Feedback"
+    | "Expenses";
   description: string;
-  status: 'Completed' | 'Pending' | 'In Progress';
+  status: "Completed" | "Pending" | "In Progress";
 };
+export type ActionResult = {
+  errors?: ActionErrors;
+};
+
+export type ActionErrors = {
+  fieldErrors?: FieldErrors;
+  formErrors?: string[];
+};
+export type FieldErrors = {
+  [x: string]: string | undefined;
+  [x: number]: string | undefined;
+  [x: symbol]: string | undefined;
+};
+export interface LoginState {
+  message?: string;
+  errors?: {
+    [key: string]: string;
+  };
+}

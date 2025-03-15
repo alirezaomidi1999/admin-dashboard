@@ -1,45 +1,29 @@
 "use client";
-
-import { signIn } from "next-auth/react";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { Button } from "../shadcn/ui/button";
+import { useSearchParams } from "next/navigation";
 import { Input } from "../shadcn/ui/input";
 import { Label } from "../shadcn/ui/label";
-import Link from "next/link";
+import { loginAction } from "@/app/actions/login-auth";
+import { useFormState } from "react-dom";
+import { SubmitButton } from "./submit-button";
 
 export default function LoginForm() {
-  const [error, setError] = useState("");
-  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    const result = await signIn("credentials", {
-      email,
-      password,
-      redirect: false,
-    });
-
-    if (result?.error) {
-      setError(result.error);
-      console.log(result);
-    } else {
-      alert("ok");
-      router.replace("http://localhost:3000");
-    }
-  };
-
+  const searchParams = useSearchParams();
+  const getCallbackUrl = searchParams.get("callbackUrl") as string;
+  const loginActionAndParams = loginAction.bind(null, getCallbackUrl);
+  const [state, formAction] = useFormState(loginActionAndParams, {});
   return (
     <div className="flex justify-center items-center bg-gray-100">
       <form
-        className="flex flex-col gap-8 bg-white shadow-shadow-1 px-12 py-16 w-[450px] rounded-lg"
-        onSubmit={handleSubmit}
+        className="flex flex-col gap-6 bg-white shadow-shadow-1 px-12 py-16 w-[450px] rounded-lg"
+        action={formAction}
       >
-        <h2 className="text-3xl font-semibold">Sign in</h2>
-        {error && <div className="text-red-500">{error}</div>}
+        <h2 className="text-3xl text-center font-semibold mb-8">Login</h2>
+
+        {/* پیام کلی خطا */}
+        {state?.message && <span className="text-red-500">{state.message}</span>}
 
         <div className="grid w-full max-w-sm items-center gap-2">
           <Label htmlFor="email">Email</Label>
@@ -47,22 +31,34 @@ export default function LoginForm() {
             className="py-4"
             type="email"
             id="email"
-            placeholder="Email"
+            placeholder="email"
             value={email}
+            name="email"
             onChange={(e) => setEmail(e.target.value)}
           />
+          {/* نمایش خطای ایمیل */}
+          {state?.errors?.email && (
+            <span className="text-sm text-red-500">{state.errors.email}</span>
+          )}
         </div>
+
         <div className="grid w-full max-w-sm items-center gap-2">
           <Label htmlFor="password">Password</Label>
           <Input
             type="password"
             id="password"
-            placeholder="Password"
+            placeholder="password"
             value={password}
+            name="password"
             onChange={(e) => setPassword(e.target.value)}
           />
+          {/* نمایش خطای رمز عبور */}
+          {state?.errors?.password && (
+            <span className="text-sm text-red-500">{state.errors.password}</span>
+          )}
         </div>
-        <Button type="submit">SIGN IN</Button>
+
+        <SubmitButton />
       </form>
     </div>
   );

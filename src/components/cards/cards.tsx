@@ -4,16 +4,8 @@ import { getOverview } from "@/services/queries/get-overview";
 import Card from "../info-card/info-card";
 import { InfoCard } from "@/types/types";
 import withDataFetching from "@/hoc/withDataFetching";
-import api from "@/services/api";
 
 function Cards({ data }: { data: InfoCard[] }) {
-  const getOverview = cache(async () => {
-    const response = await api.get("overview");
-    const data = response.data;
-    console.log(data);
-    return data;
-  });
-  getOverview();
   return (
     <div className="flex gap-4 flex-wrap">
       {data.map((card) => (
